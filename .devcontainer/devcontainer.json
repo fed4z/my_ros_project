@@ -1,0 +1,21 @@
+{
+    "name": "ROS Dev Container",
+    "dockerFile": "../Dockerfile",
+    "context": "..",
+    "extensions": [
+      "ms-vscode.cpptools",
+      "ms-iot.vscode-ros",
+      "twxs.cmake"
+    ],
+    "settings": {
+      "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "workspaceFolder": "/workspace",
+    "runArgs": [
+      "--net=host"
+    ],
+    "mounts": [
+      "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+    ]
+}

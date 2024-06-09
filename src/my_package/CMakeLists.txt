@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.5)
+project(can_sender_receiver)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rmw REQUIRED)
+find_package(rmw_implementation_cmake REQUIRED)
+find_package(can_msgs REQUIRED)
+
+include_directories(include)
+
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin ) 
+set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib ) 
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
+
+add_executable(can_sender_receiver src/can_sender_receiver.cpp)
+
+TARGET_LINK_LIBRARIES(can_sender_receiver dl -lboost_system -pthread  -lcrypt -lm -lpthread -lcanlib)
+
+ament_target_dependencies(can_sender_receiver rclcpp std_msgs can_msgs)
+
+install(TARGETS can_sender_receiver
+  DESTINATION lib/${PROJECT_NAME})
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+
+ament_package()
