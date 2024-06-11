@@ -2,7 +2,7 @@
 
 Small demo to show how fast is to set up ros environent and run some nodes inside it. In addition it is possible to test the comunication between ros nodes running in different containers.
 
-# installation
+# install & run
 Install docker app, run the docker app.
 (optional for development )Open vs code and install the remote development to be abel to connet vs code with the containers. 
 
