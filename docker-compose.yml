@@ -13,7 +13,7 @@ services:
     tty: true
     ports:
       - "11311:11311"  # ROS Master port
-    command: bash
+    command: /bin/bash -c "source /opt/ros/foxy/setup.bash && exec bash"
 
   my_node2:
     container_name: node2  # Specify the container name
@@ -27,4 +27,4 @@ services:
     tty: true
     ports:
       - "11312:11311"  # ROS Master port for the second ROS service
-    command: bash
+    command: /bin/bash -c "source /opt/ros/foxy/setup.bash && exec bash"
