@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  my_node:
+    container_name: node1  # Specify the container name
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace  # Mount the current directory (host) to /workspace (container)
+    environment:
+      - ROS_DISTRO=foxy
+    tty: true
+    ports:
+      - "11311:11311"  # ROS Master port
+    command: bash
+
+  my_node2:
+    container_name: node2  # Specify the container name
+    build:
+      context: .  # Assuming another_ros_node Dockerfile is in a subdirectory
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace  # Mount the another_ros_node directory to /workspace in the container
+    environment:
+      - ROS_DISTRO=foxy
+    tty: true
+    ports:
+      - "11312:11311"  # ROS Master port for the second ROS service
+    command: bash

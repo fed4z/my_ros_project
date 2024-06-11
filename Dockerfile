@@ -20,6 +20,11 @@ RUN /bin/bash -c "source /opt/ros/foxy/setup.bash"
 
 # Install rosdep and update
 RUN apt-get update && apt-get install -y python3-rosdep
+
+# Remove existing rosdep sources list if it exists
+RUN if [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then rm /etc/ros/rosdep/sources.list.d/20-default.list; fi
+
+# Initialize rosdep and update
 RUN rosdep init && rosdep update
 
 # Install dependencies from package.xml
